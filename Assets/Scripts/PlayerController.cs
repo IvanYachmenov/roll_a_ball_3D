@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementY;
     public float speed = 5f;
+    private int count;
 
     // Use this for initialization
     void Start ()
@@ -29,4 +30,13 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
         rb.AddForce(movement*speed);
     }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag ("Pick Up"))
+        {
+            other.gameObject.SetActive (false);
+            count++;
+        }
+    }
+
 }
