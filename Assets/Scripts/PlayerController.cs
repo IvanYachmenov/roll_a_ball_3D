@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,11 +11,17 @@ public class PlayerController : MonoBehaviour
     private float movementY;
     public float speed = 5f;
     private int count;
+    public TextMeshProUGUI countText;
+    public TextMeshProUGUI winText;
+
 
     // Use this for initialization
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
+        count = 0;
+        SetCountText ();
+        winText.text = "";
     }
 
     void OnMove(InputValue movementValue)
@@ -36,6 +43,16 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.SetActive (false);
             count++;
+            SetCountText ();
+        }
+    }
+
+    void SetCountText ()
+    {
+        countText.text = "Count: " + count.ToString ();
+        if (count >= 12)
+        {
+            winText.text = "You Win!";
         }
     }
 
